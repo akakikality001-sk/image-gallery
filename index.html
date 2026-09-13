@@ -3,23 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery</title>
 <style>
-  html, body { margin:0; padding:0; background:transparent; overflow:hidden; }
-  #frame { width:100%; border:0; display:block; height:600px; overflow:hidden; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+    height: 100%;
+  }
+  #frame {
+    width: 100%;
+    border: 0;
+    display: block;
+    height: 600px;
+    overflow: hidden;
+  }
 </style>
 </head>
 <body>
-  <iframe id="frame"
-    src="https://script.google.com/macros/s/AKfycbzYLYrJXegePaZ5jRIxJvQNu1g7FECFUf_ZAjhFchxk84PRh-S_d-fXCowM_lZlFycC/exec"
+  <iframe
+    id="frame"
+    src="https://script.google.com/macros/s/AKfycbzY-9XEW5o4h2Ljlc07QU24-RSXlIOsi2oNhUq9YjkQ6iltpZLU4rW4CGRJ-6Cd0FBE/exec"
     scrolling="no"
     allow="autoplay; fullscreen"
     referrerpolicy="no-referrer">
   </iframe>
 
   <script>
-    window.addEventListener("message", function(e) {
-      if (e.data && e.data.type === "gallery-height") {
-        document.getElementById("frame").style.height = (e.data.height + 4) + "px";
+    // Listen for height updates from the gallery and resize the iframe
+    window.addEventListener("message", function (event) {
+      if (event.data && event.data.type === "gallery-height") {
+        var f = document.getElementById("frame");
+        if (f && event.data.height) {
+          f.style.height = (event.data.height + 4) + "px";
+        }
       }
     });
   </script>
